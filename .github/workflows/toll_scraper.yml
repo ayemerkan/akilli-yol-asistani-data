@@ -1,26 +1,28 @@
 name: Otomatik Otoyol Fiyat Guncelleyici
 
+env:
+  # Node.js 24 çalışma ortamını zorunlu kılar (Haziran 2026 öncesi ve sonrası tam uyum)
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 on:
   schedule:
-    # Her 3 gunde bir gece yarisi (00:00 UTC) calisir
     - cron: '0 0 */3 * *'
-  # Isterseniz Actions sekmesinden manuel olarak tetikleyebilirsiniz
   workflow_dispatch:
 
 jobs:
   scrape-and-update:
     runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     permissions:
-      contents: write # Repoya commit atabilmesi icin gerekli izin
+      contents: write
     
     steps:
+      # Daha yeni Node ortamına sahip action-checkout v4 sürümü
       - name: Repoyu Cek (Checkout)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.1.1
 
+      # Node 24 destekleyen kararlı setup-python v5 sürümü
       - name: Python Ortamini Kur
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v5.0.0
         with:
           python-version: '3.10'
 
@@ -37,6 +39,5 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           
-          # Eger tolls.json degismisse bunu algilayip guncelleyecek
           git add tolls.json
           git diff --quiet && git diff --staged --quiet || (git commit -m "🚀 Otomatik Guncelleme: Otoyol Ucretleri Degisti" && git push)
