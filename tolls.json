@@ -1,1 +1,83 @@
+[
+  {
+    "id": "izmir_istanbul_otoyolu",
+    "name": "İzmir - İstanbul Otoyolu (Osmangazi Köprüsü Dahil)",
+    "location": {
+      "latitude": 40.5445,
+      "longitude": 29.5165
+    },
+    "prices": {
+      "class1": 1580.0,
+      "class2": 2525.0,
+      "class3": 3000.0,
+      "class4": 3000.0,
+      "class5": 3000.0,
+      "class6": 660.0
+    }
+  },
+  {
+    "id": "osmangazi_koprusu",
+    "name": "Osmangazi Köprüsü (Geçiş Noktası)",
+    "location": {
+      "latitude": 40.7330,
+      "longitude": 29.5110
+    },
+    "prices": {
+      "class1": 790.0,
+      "class2": 1265.0,
+      "class3": 1500.0,
+      "class4": 1500.0,
+      "class5": 1500.0,
+      "class6": 330.0
+    }
+  },
+  {
+    "id": "canakkale_koprusu",
+    "name": "1915 Çanakkale Köprüsü",
+    "location": {
+      "latitude": 40.3392,
+      "longitude": 26.6385
+    },
+    "prices": {
+      "class1": 930.0,
+      "class2": 1160.0,
+      "class3": 2185.0,
+      "class4": 2325.0,
+      "class5": 4370.0,
+      "class6": 230.0
+    }
+  },
+  {
+    "id": "yavuz_sultan_selim_koprusu",
+    "name": "Yavuz Sultan Selim Köprüsü",
+    "location": {
+      "latitude": 41.2014,
+      "longitude": 29.1121
+    },
+    "prices": {
+      "class1": 135.0,
+      "class2": 180.0,
+      "class3": 220.0,
+      "class4": 220.0,
+      "class5": 220.0,
+      "class6": 65.0
+    }
+  },
+  {
+    "id": "anadolu_otoyolu",
+    "name": "Anadolu Otoyolu (Çamlıca İstasyonu)",
+    "location": {
+      "latitude": 40.9796,
+      "longitude": 29.1919
+    },
+    "prices": {
+      "class1": 210.0,
+      "class2": 280.0,
+      "class3": 355.0,
+      "class4": 355.0,
+      "class5": 355.0,
+      "class6": 65.0
+    }
+  }
+]
 
