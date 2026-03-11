@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "last_updated": "2026-03-11T04:53:45.558430Z",
+    "is_verified": false
+  },
   "fuel_prices": {
     "istanbul": {
       "gasoline": 43.5,
@@ -19,7 +23,7 @@
   "tolls": [
     {
       "id": "izmir_istanbul_otoyolu",
-      "name": "İzmir - İstanbul Otoyolu (Osmangazi Köprüsü Dahil)",
+      "name": "İzmir - İstanbul Otoyolu",
       "location": {
         "latitude": 40.5445,
         "longitude": 29.5165
@@ -35,7 +39,7 @@
     },
     {
       "id": "osmangazi_koprusu",
-      "name": "Osmangazi Köprüsü (Geçiş Noktası)",
+      "name": "Osmangazi Köprüsü",
       "location": {
         "latitude": 40.733,
         "longitude": 29.511
@@ -83,7 +87,7 @@
     },
     {
       "id": "anadolu_otoyolu",
-      "name": "Anadolu Otoyolu (Çamlıca İstasyonu)",
+      "name": "Anadolu Otoyolu",
       "location": {
         "latitude": 40.9796,
         "longitude": 29.1919
