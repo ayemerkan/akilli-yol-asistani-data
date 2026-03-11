@@ -1,83 +1,149 @@
-[
-  {
-    "id": "izmir_istanbul_otoyolu",
-    "name": "İzmir - İstanbul Otoyolu (Osmangazi Köprüsü Dahil)",
-    "location": {
-      "latitude": 40.5445,
-      "longitude": 29.5165
+{
+  "fuel_prices": {
+    "istanbul": {
+      "gasoline": 43.5,
+      "diesel": 44.1,
+      "lpg": 22.5
     },
-    "prices": {
-      "class1": 1580.0,
-      "class2": 2525.0,
-      "class3": 3000.0,
-      "class4": 3000.0,
-      "class5": 3000.0,
-      "class6": 660.0
+    "ankara": {
+      "gasoline": 44.2,
+      "diesel": 44.8,
+      "lpg": 22.7
+    },
+    "izmir": {
+      "gasoline": 44.6,
+      "diesel": 45.5,
+      "lpg": 23.0
     }
   },
-  {
-    "id": "osmangazi_koprusu",
-    "name": "Osmangazi Köprüsü (Geçiş Noktası)",
-    "location": {
-      "latitude": 40.7330,
-      "longitude": 29.5110
+  "tolls": [
+    {
+      "id": "izmir_istanbul_otoyolu",
+      "name": "İzmir - İstanbul Otoyolu (Osmangazi Köprüsü Dahil)",
+      "location": {
+        "latitude": 40.5445,
+        "longitude": 29.5165
+      },
+      "prices": {
+        "class1": 1580.0,
+        "class2": 2525.0,
+        "class3": 3000.0,
+        "class4": 3000.0,
+        "class5": 3000.0,
+        "class6": 660.0
+      }
     },
-    "prices": {
-      "class1": 790.0,
-      "class2": 1265.0,
-      "class3": 1500.0,
-      "class4": 1500.0,
-      "class5": 1500.0,
-      "class6": 330.0
-    }
-  },
-  {
-    "id": "canakkale_koprusu",
-    "name": "1915 Çanakkale Köprüsü",
-    "location": {
-      "latitude": 40.3392,
-      "longitude": 26.6385
+    {
+      "id": "osmangazi_koprusu",
+      "name": "Osmangazi Köprüsü (Geçiş Noktası)",
+      "location": {
+        "latitude": 40.733,
+        "longitude": 29.511
+      },
+      "prices": {
+        "class1": 790.0,
+        "class2": 1265.0,
+        "class3": 1500.0,
+        "class4": 1500.0,
+        "class5": 1500.0,
+        "class6": 330.0
+      }
     },
-    "prices": {
-      "class1": 930.0,
-      "class2": 1160.0,
-      "class3": 2185.0,
-      "class4": 2325.0,
-      "class5": 4370.0,
-      "class6": 230.0
-    }
-  },
-  {
-    "id": "yavuz_sultan_selim_koprusu",
-    "name": "Yavuz Sultan Selim Köprüsü",
-    "location": {
-      "latitude": 41.2014,
-      "longitude": 29.1121
+    {
+      "id": "canakkale_koprusu",
+      "name": "1915 Çanakkale Köprüsü",
+      "location": {
+        "latitude": 40.3392,
+        "longitude": 26.6385
+      },
+      "prices": {
+        "class1": 930.0,
+        "class2": 1160.0,
+        "class3": 2185.0,
+        "class4": 2325.0,
+        "class5": 4370.0,
+        "class6": 230.0
+      }
     },
-    "prices": {
-      "class1": 135.0,
-      "class2": 180.0,
-      "class3": 220.0,
-      "class4": 220.0,
-      "class5": 220.0,
-      "class6": 65.0
-    }
-  },
-  {
-    "id": "anadolu_otoyolu",
-    "name": "Anadolu Otoyolu (Çamlıca İstasyonu)",
-    "location": {
-      "latitude": 40.9796,
-      "longitude": 29.1919
+    {
+      "id": "yavuz_sultan_selim_koprusu",
+      "name": "Yavuz Sultan Selim Köprüsü",
+      "location": {
+        "latitude": 41.2014,
+        "longitude": 29.1121
+      },
+      "prices": {
+        "class1": 135.0,
+        "class2": 180.0,
+        "class3": 220.0,
+        "class4": 220.0,
+        "class5": 220.0,
+        "class6": 65.0
+      }
     },
-    "prices": {
-      "class1": 210.0,
-      "class2": 280.0,
-      "class3": 355.0,
-      "class4": 355.0,
-      "class5": 355.0,
-      "class6": 65.0
+    {
+      "id": "anadolu_otoyolu",
+      "name": "Anadolu Otoyolu (Çamlıca İstasyonu)",
+      "location": {
+        "latitude": 40.9796,
+        "longitude": 29.1919
+      },
+      "prices": {
+        "class1": 210.0,
+        "class2": 280.0,
+        "class3": 355.0,
+        "class4": 355.0,
+        "class5": 355.0,
+        "class6": 65.0
+      }
+    },
+    {
+      "id": "avrasya_tuneli",
+      "name": "Avrasya Tüneli",
+      "location": {
+        "latitude": 41.0023,
+        "longitude": 28.995
+      },
+      "prices": {
+        "class1": 112.0,
+        "class2": 168.0,
+        "class3": 168.0,
+        "class4": 168.0,
+        "class5": 168.0,
+        "class6": 41.6
+      }
+    },
+    {
+      "id": "kuzey_marmara_otoyolu",
+      "name": "Kuzey Marmara Otoyolu",
+      "location": {
+        "latitude": 41.0825,
+        "longitude": 29.2845
+      },
+      "prices": {
+        "class1": 200.0,
+        "class2": 300.0,
+        "class3": 400.0,
+        "class4": 400.0,
+        "class5": 400.0,
+        "class6": 100.0
+      }
+    },
+    {
+      "id": "ankara_nigde_otoyolu",
+      "name": "Ankara - Niğde Otoyolu",
+      "location": {
+        "latitude": 38.6254,
+        "longitude": 34.7126
+      },
+      "prices": {
+        "class1": 295.0,
+        "class2": 335.0,
+        "class3": 450.0,
+        "class4": 450.0,
+        "class5": 450.0,
+        "class6": 120.0
+      }
     }
-  }
-]
-
+  ]
+}
