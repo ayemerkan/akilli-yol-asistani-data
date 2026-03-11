@@ -1,0 +1,1 @@
+# akilli-yol-asistani-data
