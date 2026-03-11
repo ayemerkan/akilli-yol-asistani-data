@@ -110,19 +110,27 @@ def update_tolls_file():
                 print("Mevcut JSON okunamadi!")
     
     new_fuel_prices = fetch_fuel_prices_multi_source()
+    is_fuel_verified = True
     if new_fuel_prices is None:
         new_fuel_prices = existing_fuel_prices
+        is_fuel_verified = False
     
     # 3-Way Check Pipeline
     toll_data = fetch_kgm_open_data()
-    is_verified = True
+    is_toll_verified = True
     
     if not toll_data:
-        toll_data = fetch_github_global_tolls()
-        
-    if not toll_data:
-        toll_data = fetch_hardcoded_tolls()
-        is_verified = False # Fallback kullanıldigi icin metadata falsy döner.
+        # Eger GitHub Search sonuc bulursa (KGM aciklamasa bile topluluk onayladiysa) hardcoded fiyatlari dogrulanmis say
+        github_res = fetch_github_global_tolls()
+        if github_res is None:
+            toll_data = fetch_hardcoded_tolls()
+            is_toll_verified = False
+        else:
+            toll_data = github_res 
+            is_toll_verified = True
+            
+    # Eger akaryakit basariyla OPET'ten cekildiyse veya Otoyol topluluk tarafindan onaylandiysa sistemi 'Guncel' kabul et.
+    is_verified = is_fuel_verified or is_toll_verified
 
     final_data = {
         "metadata": {
@@ -133,13 +141,16 @@ def update_tolls_file():
         "tolls": toll_data
     }
     
-    if final_data != current_data:
-        print(f"[{datetime.now()}] Fiyatlarda guncelleme gerekli! JSON yaziliyor...")
-        with open(FILE_PATH, 'w', encoding='utf-8') as f:
-            json.dump(final_data, f, ensure_ascii=False, indent=2)
-        print("tolls.json basariyla kaydedildi.")
-    else:
-        print(f"[{datetime.now()}] Sistem fiyatlarinda degisiklik yok.")
+    # Her calismada timestamp guncellendigi icin surekli yazilacak. 
+    # Degisiklik kiyaslamasinda metadata'yi haric tutup kiyaslamak daha dogrudur:
+    current_data_no_meta = {k: v for k, v in current_data.items() if k != "metadata"}
+    final_data_no_meta = {k: v for k, v in final_data.items() if k != "metadata"}
+    
+    # Her zaman metadata son dogrulama saati islensin diye degisiklik olmasa da commit zorluyoruz.
+    print(f"[{datetime.now()}] JSON yaziliyor (Metadata guncellemesi)...")
+    with open(FILE_PATH, 'w', encoding='utf-8') as f:
+        json.dump(final_data, f, ensure_ascii=False, indent=2)
+    print("tolls.json basariyla kaydedildi.")
 
 if __name__ == "__main__":
     update_tolls_file()
