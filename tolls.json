@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "last_updated": "2026-03-11T04:58:33.636182Z",
-    "is_verified": false
+    "last_updated": "2026-03-11T05:15:50.160253Z",
+    "is_verified": true
   },
   "fuel_prices": {
     "istanbul": {
@@ -22,7 +22,6 @@
   },
   "tolls": [
     {
-      "id": "izmir_istanbul_otoyolu",
       "name": "İzmir - İstanbul Otoyolu",
       "location": {
         "latitude": 40.5445,
@@ -35,26 +34,26 @@
         "class4": 3000.0,
         "class5": 3000.0,
         "class6": 660.0
-      }
+      },
+      "id": "izmir_istanbul_otoyolu"
     },
     {
-      "id": "osmangazi_koprusu",
       "name": "Osmangazi Köprüsü",
       "location": {
         "latitude": 40.733,
         "longitude": 29.511
       },
       "prices": {
-        "class1": 790.0,
-        "class2": 1265.0,
-        "class3": 1500.0,
-        "class4": 1500.0,
-        "class5": 1500.0,
-        "class6": 330.0
-      }
+        "class1": 555.0,
+        "class2": 890.0,
+        "class3": 1055.0,
+        "class4": 1400.0,
+        "class5": 1765.0,
+        "class6": 390.0
+      },
+      "id": "osmangazi_koprusu"
     },
     {
-      "id": "canakkale_koprusu",
       "name": "1915 Çanakkale Köprüsü",
       "location": {
         "latitude": 40.3392,
@@ -67,10 +66,10 @@
         "class4": 2325.0,
         "class5": 4370.0,
         "class6": 230.0
-      }
+      },
+      "id": "canakkale_koprusu"
     },
     {
-      "id": "yavuz_sultan_selim_koprusu",
       "name": "Yavuz Sultan Selim Köprüsü",
       "location": {
         "latitude": 41.2014,
@@ -83,10 +82,10 @@
         "class4": 220.0,
         "class5": 220.0,
         "class6": 65.0
-      }
+      },
+      "id": "yavuz_sultan_selim_koprusu"
     },
     {
-      "id": "anadolu_otoyolu",
       "name": "Anadolu Otoyolu",
       "location": {
         "latitude": 40.9796,
@@ -99,10 +98,10 @@
         "class4": 355.0,
         "class5": 355.0,
         "class6": 65.0
-      }
+      },
+      "id": "anadolu_otoyolu"
     },
     {
-      "id": "avrasya_tuneli",
       "name": "Avrasya Tüneli",
       "location": {
         "latitude": 41.0023,
@@ -115,10 +114,10 @@
         "class4": 168.0,
         "class5": 168.0,
         "class6": 41.6
-      }
+      },
+      "id": "avrasya_tuneli"
     },
     {
-      "id": "kuzey_marmara_otoyolu",
       "name": "Kuzey Marmara Otoyolu",
       "location": {
         "latitude": 41.0825,
@@ -131,10 +130,10 @@
         "class4": 400.0,
         "class5": 400.0,
         "class6": 100.0
-      }
+      },
+      "id": "kuzey_marmara_otoyolu"
     },
     {
-      "id": "ankara_nigde_otoyolu",
       "name": "Ankara - Niğde Otoyolu",
       "location": {
         "latitude": 38.6254,
@@ -147,7 +146,8 @@
         "class4": 450.0,
         "class5": 450.0,
         "class6": 120.0
-      }
+      },
+      "id": "ankara_nigde_otoyolu"
     }
   ]
 }
