@@ -4,8 +4,11 @@ import urllib.request
 import datetime
 import sys
 import os
+import ssl
 
-# PDF okuma kütüphanesini içe aktar
+# SSL sertifika doğrulamalarını devre dışı bırakalım (KGM sitesindeki SSL hatalarını bypass etmek için)
+ssl_context = ssl._create_unverified_context()
+
 try:
     from pypdf import PdfReader
 except ImportError:
@@ -14,7 +17,6 @@ except ImportError:
             self.pages = []
 
 def clean_price(price_str):
-    # '1.590,00' formatını float 1590.0 değerine dönüştürür
     return float(price_str.replace('.', '').replace(',', '.'))
 
 def scrape_city(url):
@@ -25,7 +27,7 @@ def scrape_city(url):
         }
     )
     try:
-        with urllib.request.urlopen(req, timeout=10) as response:
+        with urllib.request.urlopen(req, timeout=15, context=ssl_context) as response:
             return response.read()
     except Exception as e:
         print(f"Error downloading {url}: {e}")
@@ -65,9 +67,8 @@ def scrape_avrasya():
         }
     )
     try:
-        with urllib.request.urlopen(req, timeout=10) as response:
+        with urllib.request.urlopen(req, timeout=10, context=ssl_context) as response:
             html = response.read().decode('utf-8')
-            # 2026 Duyurusundan fiyatları eşleştir
             pattern = re.compile(
                 r'1\.\s*s[ıi]n[ıi]f\s+ara[çc]lar\s+i[çc]in\s+([0-9,]+)\s+TL.*2\.\s*s[ıi]n[ıi]f\s+ara[çc]lar\s+i[çc]in\s+([0-9,]+)\s+TL.*6\.\s*s[ıi]n[ıi]f\s+ara[çc]lar\s+i[çc]in\s+([0-9,]+)\s+TL',
                 re.IGNORECASE | re.DOTALL
@@ -110,13 +111,12 @@ def main():
     )
     
     try:
-        with urllib.request.urlopen(req, timeout=10) as r:
+        with urllib.request.urlopen(req, timeout=15, context=ssl_context) as r:
             html = r.read().decode('utf-8')
     except Exception as e:
         print(f"Error loading KGM page: {e}")
         sys.exit(1)
         
-    # PDF bağlantılarını bul
     pdf_regex = re.compile(r'href="([^"]+\.pdf)"', re.IGNORECASE)
     pdf_links = pdf_regex.findall(html)
     
@@ -144,7 +144,11 @@ def main():
     for k, v in pdf_map.items():
         print(f"{k}: {v}")
 
-    # Mevcut tolls.json dosyasını yükle
+    # tolls.json dosyasını oku
+    if not os.path.exists("tolls.json"):
+        print("Error: tolls.json file not found in the current directory.")
+        sys.exit(1)
+        
     try:
         with open("tolls.json", "r", encoding="utf-8") as f:
             data = json.load(f)
@@ -155,7 +159,6 @@ def main():
     tolls_list = data.get("tolls", [])
     updated_count = 0
     
-    # Köprüler için ortak Regex deseni
     bridge_regex = re.compile(
         r'1\s+([0-9.,]+)\s*₺\s*2\s+([0-9.,]+)\s*₺\s*3\s+([0-9.,]+)\s*₺\s*4\s+([0-9.,]+)\s*₺\s*5\s+([0-9.,]+)\s*₺\s*6\s+([0-9.,]+)\s*₺',
         re.IGNORECASE
