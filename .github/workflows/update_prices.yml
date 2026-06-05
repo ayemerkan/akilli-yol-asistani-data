@@ -1,0 +1,33 @@
+name: Update Fuel Prices Daily
+
+on:
+  schedule:
+    # TSİ 00:30'da çalışması için (Türkiye Saati = UTC + 3, yani UTC 21:30)
+    - cron: '30 21 * * *'
+  workflow_dispatch: # GitHub arayüzünden manuel tetiklemek için
+
+jobs:
+  update-prices:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write # Dosyayı commit edip pushlamak için yazma izni
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Run Scraper Script
+        run: python update_fuel_prices.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add tolls.json
+          git diff-index --quiet HEAD || (git commit -m "chore: update fuel prices" && git push)
