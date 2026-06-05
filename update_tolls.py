@@ -100,9 +100,63 @@ def scrape_avrasya():
         "class6": 218.40
     }
 
+def discover_kgm_toll_page_url():
+    ana_url = "https://www.kgm.gov.tr/Sayfalar/KGM/SiteTr/Otoyollar/UcretlerAna.aspx"
+    default_url = "https://www.kgm.gov.tr/Sayfalar/KGM/SiteTr/Otoyollar/UcretlerYeni.aspx"
+    
+    print(f"Attempting to dynamically discover active KGM toll page from {ana_url}...")
+    req = urllib.request.Request(
+        ana_url, 
+        headers={
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+        }
+    )
+    
+    try:
+        with urllib.request.urlopen(req, timeout=15, context=ssl_context) as r:
+            html = r.read().decode('utf-8')
+            
+        matches = re.findall(r'href="([^"]*ucret[^"]+\.aspx)"', html, re.IGNORECASE)
+        
+        discovered_urls = []
+        for match in matches:
+            if match.startswith("/"):
+                full_url = "https://www.kgm.gov.tr" + match
+            elif match.startswith("http"):
+                full_url = match
+            else:
+                full_url = "https://www.kgm.gov.tr/Sayfalar/KGM/SiteTr/Otoyollar/" + match
+                
+            page_name = full_url.split("/")[-1].lower()
+            if "ucretler" in page_name and "ana" not in page_name:
+                discovered_urls.append(full_url)
+                
+        if discovered_urls:
+            # Sıralama: İçinde "yeni" geçen ve yıl bilgisi en yüksek olanı önceliklendir
+            def sort_key(url):
+                url_lower = url.lower()
+                score = 0
+                if "yeni" in url_lower:
+                    score += 10
+                years = re.findall(r'20\d{2}', url_lower)
+                if years:
+                    score += int(years[0]) - 2000
+                return score
+            
+            discovered_urls.sort(key=sort_key, reverse=True)
+            active_url = discovered_urls[0]
+            print(f"Dynamic discovery SUCCESS! Found active toll page: {active_url}")
+            return active_url
+            
+    except Exception as e:
+        print(f"Dynamic discovery failed ({e}). Falling back to default URL.")
+        
+    print(f"Using active URL: {default_url}")
+    return default_url
+
 def main():
-    print("Fetching KGM Toll Rates Page...")
-    kgm_page_url = "https://www.kgm.gov.tr/Sayfalar/KGM/SiteTr/Otoyollar/UcretlerYeni.aspx"
+    kgm_page_url = discover_kgm_toll_page_url()
+    print(f"Fetching KGM Toll Rates Page: {kgm_page_url}")
     req = urllib.request.Request(
         kgm_page_url, 
         headers={
@@ -124,20 +178,21 @@ def main():
     for link in pdf_links:
         full_url = "https://www.kgm.gov.tr" + link if link.startswith("/") else link
         filename = link.split("/")[-1]
+        fn_lower = filename.lower()
         
-        if "2-Osmangazi" in filename:
+        if "osmangazi" in fn_lower:
             pdf_map["osmangazi_koprusu"] = full_url
-        elif "3-YSSKoprusu" in filename:
+        elif "yss" in fn_lower and "kuzey" not in fn_lower and "cevre" not in fn_lower:
             pdf_map["yavuz_sultan_selim_koprusu"] = full_url
-        elif "4-1915Canakkale" in filename:
+        elif "canakkale" in fn_lower or "1915" in fn_lower:
             pdf_map["canakkale_koprusu"] = full_url
-        elif "12-Gebze-Orhangazi-Izmir" in filename:
+        elif "gebze" in fn_lower or "orhangazi" in fn_lower or ("izmir" in fn_lower and "istanbul" in fn_lower):
             pdf_map["izmir_istanbul_otoyolu"] = full_url
-        elif "17-Ankara-Nigde" in filename:
+        elif "nigde" in fn_lower or "ankara-nigde" in fn_lower:
             pdf_map["ankara_nigde_otoyolu"] = full_url
-        elif "5-AnadoluOtoyolu" in filename:
+        elif "anadolu" in fn_lower:
             pdf_map["anadolu_otoyolu"] = full_url
-        elif "13-YSSKuzeyCevreYolu" in filename:
+        elif "kuzey" in fn_lower or "marmara" in fn_lower:
             pdf_map["kuzey_marmara_otoyolu"] = full_url
 
     print("Found KGM PDF URLs:")
