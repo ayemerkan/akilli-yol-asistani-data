@@ -1,21 +1,21 @@
 {
   "metadata": {
-    "last_updated": "2026-06-05T21:54:38.895056Z",
+    "last_updated": "2026-06-06T22:34:34.730796Z",
     "is_verified": true
   },
   "fuel_prices": {
     "istanbul": {
-      "gasoline": 62.95,
-      "diesel": 66.12,
+      "gasoline": 62.84,
+      "diesel": 66.11,
       "lpg": 32.34
     },
     "ankara": {
-      "gasoline": 63.96,
+      "gasoline": 63.85,
       "diesel": 67.34,
       "lpg": 32.71
     },
     "izmir": {
-      "gasoline": 64.23,
+      "gasoline": 64.12,
       "diesel": 67.59,
       "lpg": 32.65
     }
@@ -41,8 +41,8 @@
       "id": "osmangazi_koprusu",
       "name": "Osmangazi Köprüsü",
       "location": {
-        "latitude": 40.7330,
-        "longitude": 29.5110
+        "latitude": 40.733,
+        "longitude": 29.511
       },
       "prices": {
         "class1": 555.0,
@@ -106,7 +106,7 @@
       "name": "Avrasya Tüneli",
       "location": {
         "latitude": 41.0023,
-        "longitude": 28.9950
+        "longitude": 28.995
       },
       "prices": {
         "class1": 112.0,
