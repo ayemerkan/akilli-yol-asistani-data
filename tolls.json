@@ -1,23 +1,23 @@
 {
   "metadata": {
-    "last_updated": "2026-11-22T04:11:00.234000Z",
+    "last_updated": "2026-11-23T01:52:39.901114Z",
     "is_verified": true
   },
   "fuel_prices": {
     "istanbul": {
-      "gasoline": 43.5,
-      "diesel": 44.1,
-      "lpg": 22.5
+      "gasoline": 68.28,
+      "diesel": 88.7,
+      "lpg": 50.34
     },
     "ankara": {
-      "gasoline": 44.2,
-      "diesel": 44.8,
-      "lpg": 22.7
+      "gasoline": 69.3,
+      "diesel": 89.87,
+      "lpg": 50.53
     },
     "izmir": {
-      "gasoline": 44.6,
-      "diesel": 45.5,
-      "lpg": 23.0
+      "gasoline": 69.55,
+      "diesel": 90.14,
+      "lpg": 50.35
     }
   },
   "tolls": [
